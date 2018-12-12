@@ -8,6 +8,7 @@ import edu.upc.dsa.modelo.Station;
 import java.util.List;
 
 public interface GameManager {
+        //
         //USER
         /**
          * Registrar usuario

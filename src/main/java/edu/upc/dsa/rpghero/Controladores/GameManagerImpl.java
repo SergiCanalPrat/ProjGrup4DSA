@@ -16,6 +16,7 @@ import java.util.*;
 
 
 public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
+    //
 
     private static GameManagerImpl instance = null;
     final static Logger logger = Logger.getLogger(GameManagerImpl.class);
