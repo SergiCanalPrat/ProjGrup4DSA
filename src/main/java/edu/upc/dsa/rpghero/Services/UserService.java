@@ -1,11 +1,10 @@
-package edu.upc.dsa.services;
-import edu.upc.dsa.controladores.GameManager;
-import edu.upc.dsa.controladores.GameManagerImpl;
-import edu.upc.dsa.exceptions.mapFullException;
-import edu.upc.dsa.exceptions.mapNotFoundException;
-import edu.upc.dsa.exceptions.UserNotFoundException;
-import edu.upc.dsa.modelo.Bike;
-import edu.upc.dsa.modelo.map;
+package edu.upc.dsa.rpghero.services;
+import edu.upc.dsa.rpghero.controladores.GameManager;
+import edu.upc.dsa.rpghero.controladores.GameManagerImpl;
+
+import edu.upc.dsa.rpghero.exceptions.UserNotFoundException;
+import edu.upc.dsa.rpghero.modelos.Game;
+import edu.upc.dsa.rpghero.modelos.Map;
 import edu.upc.dsa.rpghero.modelos.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +51,7 @@ public class UserService {
     @GET
     @ApiOperation(value = "GetGamesByUser", notes = "Responde con todos los games de un user")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = map.class),
+            @ApiResponse(code = 200, message = "Successful", response = Map.class),//MAP???
             @ApiResponse(code = 404, message = "User not found")
     })
     @Path("/{userId}/games")

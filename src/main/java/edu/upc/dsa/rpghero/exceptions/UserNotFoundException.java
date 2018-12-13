@@ -1,4 +1,4 @@
-package edu.upc.dsa.rpghero.Exceptions;
+package edu.upc.dsa.rpghero.exceptions;
 
 public class UserNotFoundException extends Exception {
     public UserNotFoundException() {

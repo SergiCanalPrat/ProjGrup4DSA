@@ -1,15 +1,19 @@
 package edu.upc.dsa.rpghero.modelos;
 
+import java.util.HashMap;
+
 public class Map{
 
-    private String idMap;
-    private int numObjects;
-    private String numRows;
-    private double numEnemies;
-    private HashMap<int, Enemy> mapEnemies;
-    private HashMap<int, Object> mapObjects;
-
     public Map(){}
+
+    private int numColumns;
+    private int idMap;
+    private int numObjects;
+    private int numRows;
+    private int numEnemies;
+    private HashMap<Integer, Enemy> mapEnemies;
+    private HashMap<Integer, Object> mapObjects;
+
 
     public Map(int idMap, int numEnemies, int numObjects, int numRows, int numColumns) {
         this.idMap= idMap;
@@ -21,15 +25,15 @@ public class Map{
         this.mapObjects = new HashMap<>();
     }
 
-    public void setIdMap(String idMap) {
-        this.idMap= idMap;
+    public void setIdMap(int idMap) {
+        this.idMap = idMap;
     }
 
-    public String getidMap() {
+    public int getidMap() {
         return idMap;
     }
 
-    public String getnumObjects() {
+    public int getnumObjects() {
         return numObjects;
     }
 
@@ -37,19 +41,19 @@ public class Map{
         this.numObjects = numObjects;
     }
 
-    public String getnumRows() {
+    public int getnumRows() {
         return numRows;
     }
 
-    public void setnumRows(String numRows) {
+    public void setnumRows(int numRows) {
         this.numRows = numRows;
     }
 
-    public String getnumColumns() {
+    public int getnumColumns() {
         return numColumns;
     }
 
-    public void setnumColumns(String numColumns) {
+    public void setnumColumns(int numColumns) {
         this.numColumns = numColumns;
     }
 
@@ -57,23 +61,23 @@ public class Map{
         return numEnemies;
     }
 
-    public void setnumEnemies(double numEnemies) {
+    public void setnumEnemies(int numEnemies) {
         this.numEnemies = numEnemies;
     }
 
-    public HashMap<int, Enemy> getMapEnemies() {
-        return numEnemies;
+    public HashMap<Integer, Enemy> getMapEnemies() {
+        return mapEnemies;
     }
 
-    public void setMapEnemies(HashMap<int, Enemy> mapEnemies) {
+    public void setMapEnemies(HashMap<Integer, Enemy> mapEnemies) {
         this.mapEnemies = mapEnemies;
     }
 
-    public double getMapObjects() {
+    public HashMap<Integer, Object> getMapObjects() {
         return mapObjects;
     }
 
-    public void setMapObjects(HashMap<int, Enemy> mapObjects) {
+    public void setMapObjects(HashMap<Integer, Enemy> mapObjects) {
         this.numObjects = numObjects;
     }
 

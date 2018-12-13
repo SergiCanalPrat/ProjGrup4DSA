@@ -1,14 +1,11 @@
-package edu.upc.dsa.exceptions;
+package edu.upc.dsa.rpghero.exceptions;
 
-public class StationNotFoundException extends Exception {
-
-    public StationNotFoundException() {
+public class MapNotFoundException extends Exception {
+    public MapNotFoundException() {
         super();
     }
 
-    public StationNotFoundException(String message) {
+    public MapNotFoundException(String message) {
         super(message);
     }
 }
-
-

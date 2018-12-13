@@ -6,28 +6,30 @@ import java.util.List;
 
 public class User {
 
-    public String getIdUser() {
-        return idUser;
-    }
 /*
 */
-    
-    private String idUser;
+    private int idUser;
     private String mail;
     private String password;
-    private List<Game> partidasGuardadas; 
+    private List<Game> partidasGuardadas;
      
 
     //Si hacemos un servicio siempre añadir el constructor vacio!!!!
     public User() {}
 
-    public User(String idUser, String mail, String password) {
+    public User(int idUser, String mail, String password) {
         this.idUser = idUser;
         this.mail = mail;
         this.password = password;
+        this.partidasGuardadas = new ArrayList<>();
     }
 
-    public void getIdUser(int idUser){
+    public List<Game> getGamesFromUser() {
+        return partidasGuardadas;
+    }
+
+
+    public int getIdUser(int idUser){
         return idUser;
     }
         
@@ -53,10 +55,9 @@ public class User {
 
     public Game getGameById(int gameId) {
 
-        for (int i = 0; i < games.size(); i++) {
-            Game game = games.get(i);
-            if (game.getIdGame().equals(gameId)){
-                logger.info("Devolvemos game que corrsponde a la id " + game.getIdGame());
+        for (int i = 0; i < partidasGuardadas.size(); i++) {
+            Game game = partidasGuardadas.get(i);
+            if (game.getIdGame() == (gameId)){
                 return game;
             }
         }

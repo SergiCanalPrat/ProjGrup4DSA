@@ -16,6 +16,7 @@ public class UsersDAOImpl implements DAOUsers {
 
     @Override
     public User getUser(int idUser) {
-        return new User("Sergi");
+        //PETA -- return new User("Sergi");
+        return null;
     }
 }

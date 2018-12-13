@@ -10,5 +10,3 @@ public interface DAOUsers {
         public User getUser(int idUser);
 
     }
-
-}

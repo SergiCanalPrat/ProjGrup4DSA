@@ -5,6 +5,7 @@ public class Position {
     private int idPos;
     private int idMap;
     private int idGame;
+    private int idPosition;
     
     private int x;
     private int y;
@@ -26,7 +27,7 @@ public class Position {
     }
 
     public void setIdPosition(int IdPosition) {
-        this.type = type;
+        this.idPosition = idPosition;
     }
 
     public int getX() {
@@ -34,7 +35,7 @@ public class Position {
     }    
 
     public void setX(int x) {
-        this.type = type;
+        this.x = x;
     }
 
 
@@ -43,7 +44,7 @@ public class Position {
     }    
 
     public void sety(int y) {
-        this.type = type;
+        this.y = y;
     }
 
     public int getidGame() {
@@ -51,7 +52,7 @@ public class Position {
     }
 
     public void setidGame(int idGame) {
-        this.type = type;
+        this.idGame = idGame;
     }
 
     public int getidMap() {

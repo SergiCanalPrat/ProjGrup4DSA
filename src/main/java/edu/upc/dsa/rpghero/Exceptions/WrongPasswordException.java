@@ -1,4 +1,4 @@
-package edu.upc.dsa.exceptions;
+package edu.upc.dsa.rpghero.exceptions;
 
 public class WrongPasswordException extends Exception {
 

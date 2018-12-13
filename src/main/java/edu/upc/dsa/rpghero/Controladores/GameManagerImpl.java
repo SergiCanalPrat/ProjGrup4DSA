@@ -1,32 +1,30 @@
-package edu.upc.dsa.controladores;
+package edu.upc.dsa.rpghero.controladores;
 
-import edu.upc.dsa.exceptions.StationFullException;
-import edu.upc.dsa.exceptions.UserNotFoundException;
-import edu.upc.dsa.modelo.Bike;
-import edu.upc.dsa.modelo.Station;
 import edu.upc.dsa.rpghero.daos.DAOUsers;
 import edu.upc.dsa.rpghero.daos.UsersDAOImpl;
-import edu.upc.dsa.rpghero.modelos.Enemy;
-import edu.upc.dsa.rpghero.modelos.PNJ;
-import edu.upc.dsa.rpghero.modelos.Position;
-import edu.upc.dsa.rpghero.modelos.User;
+import edu.upc.dsa.rpghero.exceptions.UserNotFoundException;
+import edu.upc.dsa.rpghero.exceptions.WrongPasswordException;
+import edu.upc.dsa.rpghero.modelos.*;
+import io.swagger.models.auth.In;
 import org.apache.log4j.Logger;
 
+import java.lang.Object;
 import java.util.*;
+import java.util.Map;
 
 
-public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
+public class GameManagerImpl implements GameManager {
     //
 
     private static GameManagerImpl instance = null;
     final static Logger logger = Logger.getLogger(GameManagerImpl.class);
-    private HashMap<int, Enemy> enemies;
+    private HashMap<Integer, Enemy> enemies;
     private ArrayList<Game> games;
-    private HashMap<int, Map> maps;
-    private HashMap<int, Object> objects;
-    private HashMap<int, PNJ> pnjs;
+    private HashMap<Integer, Map> maps;
+    private HashMap<Integer, Object> objects;
+    private HashMap<Integer, PNJ> pnjs;
     private LinkedList<Position> positions;
-    private HashMap<int,User> users;
+    private HashMap<Integer, User> users;
 
     public GameManagerImpl() {
         this.enemies = new HashMap<>();
@@ -34,8 +32,8 @@ public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
         this.maps = new HashMap<>();
         this.objects = new HashMap<>();
         this.pnjs = new HashMap<>();
-        this.positions = new List<>();
-        this.users = new Map<>();
+        this.positions = new LinkedList<>();
+        this.users = new HashMap<>();
     }
 
     //Patron Singleton
@@ -47,42 +45,37 @@ public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
     //USER
 
     //Afegir un user
-    public void addUserBBDD(int idUser, String userName, String password);
-        User user = new User(idUser,userName,password);
+    public void addUserBBDD(int idUser, String userName, String password) {
+        User user = new User(idUser, userName, password);
         logger.info("Añadimos un user con los parametros que pedimos");
-        this.users.put(idUser,user);
+        this.users.put(idUser, user);
     }
 
     //public void editUserName(int idUser, String oldUserName, String newUserName);
-    public int editPassword(int idUser, String oldPassword, String newPassword) throws edu.upc.dsa.exceptions.WrongPasswordException {
-    {
+    public int editPassword(int idUser, String oldPassword, String newPassword) throws WrongPasswordException {
         String oldPass = users.get(idUser).getPassword();
-        if(oldPass == oldPassword)
+        if (oldPass == oldPassword)
             users.get(idUser).setPassword(newPassword);
-        else 
-            throw new edu.upc.dsa.exceptions.WrongPasswordException();
+        else
+            throw new WrongPasswordException();
+
+        return 1;
     }
 
-    public void deleteUser(int idUser, String password){
+    public void deleteUser(int idUser, String password) {
 
         DAOUsers userDAO = new UsersDAOImpl();
         userDAO.deleteUser();
 
-        String pwd = users.get(idUser).getPassword();
-        if(pwd == password){
-            this.users.remove(idUser)
-        else 
-            throw new edu.upc.dsa.exceptions.WrongPasswordException();
     }
-        
-    public List<Game> gamesByUser(String userId) throws UserNotFoundException{
+
+    public List<Game> gamesByUser(String userId) throws UserNotFoundException {
         User user = this.users.get(userId);
         logger.info("Buscamos el user...");
         if (user != null) {
             logger.info("Estas son los games jugados por el user: " + user.getGamesFromUser().toString());
-            return User.getGamesFromUser();
-        }
-        else
+            return user.getGamesFromUser();
+        } else
             throw new UserNotFoundException();
     }
 
@@ -91,84 +84,123 @@ public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
     }
 
     //OBJETO
-    /**Ejm: Insert("idObjeto", "Nombre", "idMapa", "idPos", "precio") 
-        *      Insert("1", "Llave", "1", "3", "4")
-    */ 
-    public void addObjectBBDD(int idObject, String name, int price, int idPosition, int idMap){
+
+    /**
+     * Ejm: Insert("idObjeto", "Nombre", "idMapa", "idPos", "precio")
+     * Insert("1", "Llave", "1", "3", "4")
+     */
+    public void addObjectBBDD(int idObject, String name, int price, int idPosition, int idMap) {
         //Afegir un edu.upc.dsa.rpghero.modelos.Object
-        Object object = new Object(idObject, name, price, idPosition, idMap);
+        //PETA -- Object object = new Object(idObject, name, price, idPosition, idMap);
         logger.info("Añadimos un object con los parametros que pedimos");
 
-
+/*      FALTA IMPLEMENTAR
         ObjectDAO objDAO = DAOFactory.getDAOObject();  // new ObjectDAO();
         objDAO.add(object);
 
-        this.objects.add(object); 
+        this.objects.put(Integer, object);
+
+        */
     }
 
-    public int numObjects(String idMap) throws MapNotFoundException{
-        return this.maps(idMap).objects.size();
+    /* NO FUNCIONA
+    public int numObjects(String idMap){
+        return this.maps.get(idMap)
 
     }
+    */
 
-    public void addObjectHero(int idObject, int idUser, int idGame, idMapa){
-        Object object = this.users.get(idUser).getGameById(idGame).
-                        getMap().getMapObjects().remove(idObject);
+    public void addObjectHero(int idObject, int idUser, int idGame, int idMapa) {
+        edu.upc.dsa.rpghero.modelos.Object object = this.users.get(idUser).getGameById(idGame).
+                getMap().getMapObjects().remove(idObject);
         logger.info("Añadimos un objeto del mapa en el que se encuentra el usuario al usuario");
         this.users.get(idUser).getGameById(idGame).getInventory().put(idObject, object);
     }
 
     //Mapa
-        /**Ejm: Insert("numFilas", "numCol", "numObj", "idMap", "numEnemigos") 
-         *      Insert("4", "5", "4", "2", "2")
-         *      este ejemplo nos crea un mapa de 4x5, con 4 obj 2 enemigos.
-         *      nosotros como admins, insertamos un enmigo en un cierta posicion.
-         *      en la tabla de mapas tendremos todos los mapas, no te molaria tener varios tipos de mapas
-         *      y elegir, aunque solo usemos 2. peero no es mas faena eh, si solo cambiaremos las filas y las 
-         *      columnas. y entonces depues en la tabla de enemigos tenemos en que mapa se encuentra y en q posicion.
-        */
-                
-        public void addMapBBDD(int idMap, int numEnemies, int numObjects, int numRows, int numColumns){
-            //Afegir un edu.upc.dsa.rpghero.modelos.Map
-            Map map = new Map(idMap, numEnemies, numObjects, numRows, numColumns);
-            logger.info("Añadimos un map con los parametros que pedimos");
-            this.maps.add(map); 
-        }
-        
-        public void addEnemyToMap(int idPosition, int idEnemy, int pain, int speed, int type, int idMap){
-                Enemy enemy = enemies.get(idEnemy);
-                enemy.setIdPosition(idPosition);
-                Enemy enemy2 = this.maps.getMap(idMap).getMapEnemies().put(idEnemy, enemy);
-                if (enemy2 != null)
-                    logger.info("Añadimos un enemy al mapa que pedimos");
-                else
-                    logger.info("Ha pasado algo al añadir enemigo al map");
+
+    /**
+     * Ejm: Insert("numFilas", "numCol", "numObj", "idMap", "numEnemigos")
+     * Insert("4", "5", "4", "2", "2")
+     * este ejemplo nos crea un mapa de 4x5, con 4 obj 2 enemigos.
+     * nosotros como admins, insertamos un enmigo en un cierta posicion.
+     * en la tabla de mapas tendremos todos los mapas, no te molaria tener varios tipos de mapas
+     * y elegir, aunque solo usemos 2. peero no es mas faena eh, si solo cambiaremos las filas y las
+     * columnas. y entonces depues en la tabla de enemigos tenemos en que mapa se encuentra y en q posicion.
+     */
+
+    public void addMapBBDD(int idMap, int numEnemies, int numObjects, int numRows, int numColumns) {
+        //Afegir un edu.upc.dsa.rpghero.modelos.Map
+        //PETA -- Map map = new Map(idMap, numEnemies, numObjects, numRows, numColumns);
+        logger.info("Añadimos un map con los parametros que pedimos");
+        //PETA -- this.maps.put(idMap, Map);
+    }
+
+    public void addEnemyToMap(int idPosition, int idEnemy, int pain, int speed, int type, int idMap) {
+        Enemy enemy = enemies.get(idEnemy);
+        enemy.setIdPosition(idPosition);
+        /*PETA -- Enemy enemy2 = this.maps.get(idMap).getMapEnemies().put(idEnemy, enemy);
+        if (enemy2 != null)
+            logger.info("Añadimos un enemy al mapa que pedimos");
+        else
+            logger.info("Ha pasado algo al añadir enemigo al map");
+            */
+    }
+
+
+    public void addPNJToMap(int idPosition, int idMap, int idPNJ) {
+        PNJ pnj = pnjs.get(idPNJ);
+        pnj.setIdPosition(idPosition);
+        /*PETA -- PNJ pnj2 = this.maps.getMap(idMap).getMapPNJ().put(idPNJ, PNJ);
+        if (pnj2 != null)
+            logger.info("Añadimos un PNJ al mapa que pedimos");
+        else
+            logger.info("Ha pasado algo al añadir enemigo al map");
+            */
+    }
+
+
+    public void addObjectToMap(int idObject, String name, int price, int idPosition, int idMap) {
+        Object object = enemies.get(idObject);
+        //PETA -- object.setIdPosition(idPosition);
+        /*PETA -- Object object2 = this.maps.getMap(idMap).getMapObjects().put(idObject, Object);
+        if (object2 != null)
+            logger.info("Añadimos un edu.upc.dsa.rpghero.modelos.Object al mapa que pedimos");
+        else
+            logger.info("Ha pasado algo al añadir enemigo al map");
+            */
+    }
+
+
+    public Enemy getEnemyById(int idEnemy) {
+
+        for (int i = 0; i < enemies.size(); i++) {
+            Enemy enemy = enemies.get(i);
+            if (enemy.getIdEnemy() == idEnemy){
+                logger.info("Devolvemos enemy que corresponde a la id " + enemy.getIdEnemy());
+                return enemy;
             }
-
         }
+        return null;
+    }
 
-        public void addPNJToMap(String idPNJ, int idMap, int idPosition){
-                PNJ pnj = pnjs.get(idPNJ);
-                pnj.setIdPosition(positionId);
-                PNJ pnj2 = this.maps.getMap(idMap).getMapPNJ().put(idPNJ, PNJ);
-                if (pnj2 != null)
-                    logger.info("Añadimos un PNJ al mapa que pedimos");
-                else
-                    logger.info("Ha pasado algo al añadir enemigo al map");
-            }
+    public void addEnemyBBDD (int idPosition, int pain, int speed, int type, int idEnemy ){
+    }
 
-        }
+    public List<String> GetStatsOfEnemy(String enemyId) {
+        return null;
+    }
 
-        public void addObjectToMap(int idObject, String name, int price, int idPosition, int idMap){
-                Object object = enemies.get(idObject);
-                object.setIdPosition(idPosition);
-                Object object2 = this.maps.getMap(idMap).getMapObjects().put(idObject, Object);
-                if (object2 != null)
-                    logger.info("Añadimos un edu.upc.dsa.rpghero.modelos.Object al mapa que pedimos");
-                else
-                    logger.info("Ha pasado algo al añadir enemigo al map");
-            }
-        }
+    public ArrayList<Enemy> getEnemies() {
+        return null;
+    }
+
+    public int numEnemies(String idMap) throws Exception{
+        return 1;
+    }
+}
+
+
 
     /*Afegir una station
     public void addStation(String idStation, String description, int max, double lat, double lon) {
@@ -307,4 +339,4 @@ public class GameManagerImpl implements edu.upc.dsa.controladores.GameManager {
 
  */
 
-}
+

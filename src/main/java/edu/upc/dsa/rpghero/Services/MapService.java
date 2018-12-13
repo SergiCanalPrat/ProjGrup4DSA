@@ -1,12 +1,9 @@
-package edu.upc.dsa.services;
+package edu.upc.dsa.rpghero.services;
 
-import edu.upc.dsa.controladores.GameManager;
-import edu.upc.dsa.controladores.GameManagerImpl;
-import edu.upc.dsa.exceptions.mapFullException;
-import edu.upc.dsa.exceptions.mapNotFoundException;
-import edu.upc.dsa.exceptions.UserNotFoundException;
-import edu.upc.dsa.modelo.Map;
-import edu.upc.dsa.modelo.map;
+import edu.upc.dsa.rpghero.controladores.GameManager;
+import edu.upc.dsa.rpghero.controladores.GameManagerImpl;
+import edu.upc.dsa.rpghero.exceptions.MapNotFoundException;
+import edu.upc.dsa.rpghero.exceptions.UserNotFoundException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,15 +15,16 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.Path;
+import java.util.Map;
 
-@Api(value = "/maps", description = "Endpoint to edu.upc.dsa.rpghero.modelos.Map Service")
+@Api(value = "/maps", description = "Endpoint to edu.upc.dsa.rpghero.rpghero.modelos.Map Service")
 @Path("/maps")
-public class mapService {
+public class MapService {
 
     private GameManager gm;
 
 
-    public mapService() {
+    public MapService() {
         this.gm = GameManagerImpl.getInstance();
     }
     
@@ -42,8 +40,8 @@ public class mapService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMap(@PathParam("mapId") String mapId,
                             @PathParam("userId") String userId) {
-        try {
-            Map b = this.gm.getMap(mapId,userId);
+        /*try {
+            PETA -- Map b = this.gm.getMap(mapId,userId);
             if (b == null)
                 return Response.status(404).build();
             else
@@ -52,7 +50,8 @@ public class mapService {
             return Response.status(405).build();
         } catch (MapNotFoundException e) {
             return Response.status(404).build();
+            */
+        return null;
         }
 
     }
-}

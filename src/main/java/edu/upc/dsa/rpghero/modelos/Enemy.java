@@ -8,32 +8,43 @@ public class Enemy{
     public Enemy(){
 
     }
-    private String idEnemy;
+    private int idEnemy;
     private int speed;
+    private int pain;
     private String type;
-    private double positionId;
+    private int idPosition;
 
-    public String getidEnemy() {
+
+    public Enemy(int idEnemy, int speed, int pain, String type, int idPosition) {
+        this.idEnemy= idEnemy;
+        this.speed = speed;
+        this.pain = pain;
+        this.type = type;
+        this.idPosition = idPosition;
+    }
+
+    public int getIdEnemy() {
         return idEnemy;
     }
 
-    public int getspeed() {
+    public void setIdEnemy(int idEnemy) {
+        this.idEnemy = idEnemy;
+    }
+
+    public int getSpeed() {
         return speed;
-    }
-
-    public Enemy(String idEnemy, int type, int speed, int positionId) {
-        this.idEnemy= idEnemy;
-        this.type = type;
-        this.speed = speed;
-        this.positionId = positionId;
-    }
-
-    public void setIdEnemy(String idEnemy) {
-        this.idEnemy= idEnemy;
     }
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getPain() {
+        return pain;
+    }
+
+    public void setPain(int pain) {
+        this.pain = pain;
     }
 
     public String getType() {
@@ -44,12 +55,12 @@ public class Enemy{
         this.type = type;
     }
 
-    public double getPositionId() {
-        return positionId;
+    public int getIdPosition() {
+        return idPosition;
     }
 
-    public void setPositionId(double positionId) {
-        this.positionId = positionId;
+    public void setIdPosition(int idPosition) {
+        this.idPosition = idPosition;
     }
 
 }

@@ -1,25 +1,17 @@
-package edu.upc.dsa.controladores;
+package edu.upc.dsa.rpghero.controladores;
 
-import edu.upc.dsa.exceptions.StationFullException;
-import edu.upc.dsa.exceptions.UserNotFoundException;
-import edu.upc.dsa.modelo.Bike;
-import edu.upc.dsa.modelo.Station;
+import edu.upc.dsa.rpghero.exceptions.UserNotFoundException;
+import edu.upc.dsa.rpghero.exceptions.WrongPasswordException;
+import edu.upc.dsa.rpghero.modelos.Game;
 
 import java.util.List;
 
 public interface GameManager {
-        //
-        //USER
-        /**
-         * Registrar usuario
-         * @param idUser identifier of the user
-         * @param name name of the user
-         * @param surname surname of the user
-         */
+
         public void addUserBBDD(int idUser, String userName, String password);
         //public void editUserName(int idUser, String oldUserName, String newUserName);
-        public int editPassword(int idUser, String oldPassword, String newPassword);
-        public void deleteUser(int idUser, String userName, string Password);
+        public int editPassword(int idUser, String oldPassword, String newPassword) throws WrongPasswordException;
+        public void deleteUser(int idUser, String Password);
         public List<Game> gamesByUser(String userId) throws UserNotFoundException;
         public int numUsers();
         
@@ -28,15 +20,15 @@ public interface GameManager {
          *      Insert("1", "2", "30", "5", "1")
         */ 
         public void addEnemyBBDD(int idPosition, int idEnemy, int pain, int speed, int type);
-        public int numEnemies(String idMap) throws MapNotFoundException; 
+        public int numEnemies(String idMap) throws Exception;
         
         //OBJETO
         /**Ejm: Insert("idObjeto", "Nombre", "idMapa", "idPos", "precio") 
          *      Insert("1", "Llave", "1", "3", "4")
         */ 
-        public void addObjectBBDD(String idObject);
-        public int numObjects(String idMap) throws MapNotFoundException; 
-        public void addObjectHero(String idObject);
+        //FALTA IMPLEMENTAR -- public void addObjectBBDD(String idObject);
+        //FALTA IMPLEMENTAR -- public int numObjects(String idMap) throws Exception;
+        //FALTA IMPLEMENTAR -- public void addObjectHero(String idObject);
         
         //Mapa
         /**Ejm: Insert("numFilas", "numCol", "numObj", "idMap", "numEnemigos") 
@@ -49,8 +41,8 @@ public interface GameManager {
         */
                 
         public void addMapBBDD(int idMap, int numEnemies, int numObjects, int numRows, int numColumns); 
-        public void addEnemyToMap(int idPosition, int idEnemy, int pain, int speed, int type);
-        public void addPNJToMap(int idPosition, int idEnemy, int pain, int speed, int type);
+        //FALTA IMPLEMENTAR -- public void addEnemyToMap(int idPosition, int idEnemy, int pain, int speed, int type);
+        public void addPNJToMap(int idPosition, int idMap, int idPNJ);
         public void addObjectToMap(int idObject, String name, int price, int idPosition, int idMap);
         
         //PNJ

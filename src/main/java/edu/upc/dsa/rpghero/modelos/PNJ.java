@@ -3,18 +3,23 @@ package edu.upc.dsa.rpghero.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PNJ{
+public class PNJ {
 
     private String idPNJ;
     private int idMap;
+    private int type;
     private String dialogue1;
-    private int positionId;
+    private String dialogue2;
+    private String dialogue3;
+    private String dialogue4;
+    private int idPosition;
 
-    public PNJ(){}
+    public PNJ() {
+    }
 
-    public PNJ(String idPNJ, int idMap, String dialogue1, String dialogue2,
-                String dialogue3,String dialogue4, int idPosition ) {
-        this.idPNJ= idPNJ;
+    public PNJ(String idPNJ, int idMap, int type, String dialogue1, String dialogue2,
+               String dialogue3, String dialogue4, int idPosition) {
+        this.idPNJ = idPNJ;
         this.type = type;
         this.idMap = idMap;
         this.dialogue1 = dialogue1;
@@ -24,7 +29,7 @@ public class PNJ{
         this.idPosition = idPosition;
     }
 
-     public String getidPNJ() {
+    public String getidPNJ() {
         return idPNJ;
     }
 
@@ -36,7 +41,7 @@ public class PNJ{
         return idMap;
     }
 
-    public void setDialogue1(int dialogue1) {
+    public void setDialogue1(String dialogue1) {
         this.dialogue1 = dialogue1;
     }
 
@@ -44,7 +49,7 @@ public class PNJ{
         return dialogue1;
     }
 
-    public void setDialogue2(int dialogue2) {
+    public void setDialogue2(String dialogue2) {
         this.dialogue2 = dialogue2;
     }
 
@@ -52,7 +57,7 @@ public class PNJ{
         return dialogue2;
     }
 
-    public void setDialogue3(int dialogue3) {
+    public void setDialogue3(String dialogue3) {
         this.dialogue3 = dialogue3;
     }
 
@@ -60,7 +65,7 @@ public class PNJ{
         return dialogue3;
     }
 
-    public void setDialogue4(int dialogue4) {
+    public void setDialogue4(String dialogue4) {
         this.dialogue4 = dialogue4;
     }
 
@@ -68,11 +73,12 @@ public class PNJ{
         return dialogue4;
     }
 
-    public void idPosition(int idPosition) {
+    public void setIdPosition(int idPosition) {
         this.idPosition = idPosition;
     }
 
-    public String idPosition() {
+    public int getIdPosition() {
         return idPosition;
 
+    }
 }
