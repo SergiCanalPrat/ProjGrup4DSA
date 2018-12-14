@@ -6,7 +6,7 @@ public class UsersDAOImpl implements DAOUsers {
     //
     @Override
     public void addUser() {
-        System.out.println("addUSer OK");
+        System.out.println("addUser OK");
     }
 
     @Override

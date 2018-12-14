@@ -1,20 +1,20 @@
 package edu.upc.dsa.rpghero.services;
 
 import edu.upc.dsa.rpghero.controladores.GameManagerImpl;
-import edu.upc.dsa.rpghero.exceptions.UserNotFoundException;
 import edu.upc.dsa.rpghero.modelos.Enemy;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Api(value = "/enemies", description = "Endpoint to Enemy Service")
@@ -67,7 +67,7 @@ public class EnemyService {
     })
     @Path("/{enemyId}/stats")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response GetStatsOfEnemy(@PathParam("enemyId") String enemyId) throws Exception {
+    public Response GetStatsOfEnemy(@PathParam("enemyId") String enemyId) {
         List<String> stats = this.gm.GetStatsOfEnemy(enemyId);
         GenericEntity<List<String>> entity = new GenericEntity<List<String>>(stats){};
         return Response.status(200).entity(entity).build();

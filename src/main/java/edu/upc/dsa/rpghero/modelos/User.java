@@ -17,8 +17,7 @@ public class User {
     //Si hacemos un servicio siempre añadir el constructor vacio!!!!
     public User() {}
 
-    public User(int idUser, String mail, String password) {
-        this.idUser = idUser;
+    public User(String mail, String password) {
         this.mail = mail;
         this.password = password;
         this.partidasGuardadas = new ArrayList<>();
